@@ -10,24 +10,27 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
   @HttpCode(200)
   @Post('esPar')
-  adiosMundo():string {
-    const segundos =this.obtenerSegundos();
-    if(segundos% 2 ===0){
+  adiosMundo(): string {
+    const segundos = this.obtenerSegundos();
+    if (segundos % 2 === 0) {
       return 'Adios Mundo';
-    }else{
+    } else {
       throw new InternalServerErrorException(
-        'Es Impar'
+        'Es Impar',
       );
     }
 
   }
-  private obtenerSegundos(): number{
+
+  private obtenerSegundos(): number {
     return new Date().getSeconds();
   }
 
 }
+
 /*
 // Typescript
 // Declaracion de variables
