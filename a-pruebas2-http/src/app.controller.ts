@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, InternalServerErrorException, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller('pepito')
@@ -10,6 +10,23 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @HttpCode(200)
+  @Post('esPar')
+  adiosMundo():string {
+    const segundos =this.obtenerSegundos();
+    if(segundos% 2 ===0){
+      return 'Adios Mundo';
+    }else{
+      throw new InternalServerErrorException(
+        'Es Impar'
+      );
+    }
+
+  }
+  private obtenerSegundos(): number{
+    return new Date().getSeconds();
+  }
+
 }
 /*
 // Typescript
