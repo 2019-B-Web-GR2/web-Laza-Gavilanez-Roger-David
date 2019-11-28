@@ -1,4 +1,5 @@
-import { Controller, Get, HttpCode, InternalServerErrorException, Post } from '@nestjs/common';
+// @ts-ignore
+import {Controller, Get, HttpCode, InternalServerErrorException, Post, Query} from "@nestjs/common";
 import { AppService } from './app.service';
 
 @Controller('pepito')
@@ -14,7 +15,7 @@ export class AppController {
   @HttpCode(200)
   @Post('esPar')
   adiosMundo(): string {
-    const segundos = this.obtenerSegundos();
+   const segundos = this.obtenerSegundos();
     if (segundos % 2 === 0) {
       return 'Adios Mundo';
     } else {
@@ -24,13 +25,73 @@ export class AppController {
     }
 
   }
-
-  private obtenerSegundos(): number {
-    return new Date().getSeconds();
-  }
-
+}
+private obtenerSegundos(): number {
+  return new Date().getSeconds();
+}
+@Get('bienvenida')
+public bienvenida(
+    @Query() parametrosDeConsulta: ObjetoBienvenida,
+@Query('nombre') nombreUsuario: string,
+@Query('numero') numeroUsuario: number,
+@Query('casado') casadoUsuario: boolean,
+): string {
+  // tslint:disable-next-line:no-console
+  console.log(parametrosDeConsulta);
+  // tslint:disable-next-line:no-console
+  console.log(typeof nombreUsuario);
+  // tslint:disable-next-line:no-console
+  console.log(typeof numeroUsuario);
+  // tslint:disable-next-line:no-console
+  console.log(typeof casadoUsuario);
+  // template strings \\ 'Mensaje ${variable}'
+  return 'Mensaje ${parametrosDeConsulta.nombre} Numero: ${parametrosDeConsulta.numero}';
 }
 
+@Get('inscripcion-curso/:idCurso/:cedula') // /:nombreParametro
+public inscripcionCurso(
+    @Param() parametrosDeRuta: ObjetoInscripcion,
+@Param('idCurso') idCurso: string,
+    // tslint:disable-next-line:no-shadowed-variable
+@Param('cedula') cedula: string,
+): string {
+  // tslint:disable-next-line:no-console
+  console.log(parametrosDeRuta);
+  // template strings \\ 'Mensaje ${variable}'
+  return 'Te inscribiste al curso: ${parametrosDeRuta.idCurso}' +
+      '${parametrosDeRuta.cedula}';
+}
+@Post('almorzar')
+@HttpCode(200)
+public almorzar(
+    @Body() parametrosDeCuerpo,
+@Body('id') id: number,
+): string {
+  // tslint:disable-next-line:no-console
+  console.log(parametrosDeCuerpo);
+  // template strings \\ 'Mensaje ${variable}'
+  return 'Te inscribiste al curso: ${parametrosDeCuerpo}';
+}
+}
+@Get('obtener-cabeceras')
+obtenerCabeceras(
+    @Headers() cabeceras,
+@Headers() 'numerouno') numeroUno: string,
+){
+  console.log(cabecera)
+  return 'Las cabeceras son: ${numeroUno}'
+}
+
+
+interface ObjetoBienvenida {
+  idCurso?: string;
+  cedula: string;
+}
+interface ObjetoInscripcion {
+  nombre?: string;
+  numero?: string;
+  casado?: string;
+}
 /*
 // Typescript
 // Declaracion de variables

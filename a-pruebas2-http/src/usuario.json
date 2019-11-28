@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "nombre": "Roger",
+  "casado": false,
+  "hijos": null,
+  "mascota":{
+    "id": 1,
+    "nombre": "cachetes"
+  },
+
+    "apellido":"Laza"
+}
