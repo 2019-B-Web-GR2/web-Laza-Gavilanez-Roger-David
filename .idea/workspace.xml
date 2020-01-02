@@ -6,7 +6,6 @@
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\a-pruebas2-http\node_modules\prettier" />
     <property name="ts.external.directory.path" value="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\segundo-semestre\node_modules\typescript\lib" />
   </component>
@@ -67,7 +67,7 @@
       <workItem from="1577902117956" duration="1182000" />
       <workItem from="1577905831857" duration="684000" />
       <workItem from="1577912670732" duration="269000" />
-      <workItem from="1578002736978" duration="3834000" />
+      <workItem from="1578002736978" duration="4383000" />
     </task>
     <servers />
   </component>
