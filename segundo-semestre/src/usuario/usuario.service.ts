@@ -1,83 +1,87 @@
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {DeleteResult, Equal, LessThan, Like, MoreThan, Repository} from 'typeorm';
-import {UsuarioEntity} from './usuario.entity';
+import {Injectable} from "@nestjs/common";
+import {InjectRepository} from "@nestjs/typeorm";
+import {UsuarioEntity} from "./usuario.entity";
+import {DeleteResult, Like, MoreThan, Repository} from "typeorm";
 
 @Injectable()
 export class UsuarioService {
-    // @ts-ignore
     constructor(
-        @InjectRepository(UsuarioEntity) // inyectar dpendencias
-        // tslint:disable-next-line:variable-name
-        private _repositorioUsuario: Repository<UsuarioEntity>,
+        @InjectRepository(UsuarioEntity) // Inyectar Dependencias
+        private _repositorioUsuario: Repository<UsuarioEntity>
     ) {
     }
 
     encontrarUno(id: number): Promise<UsuarioEntity | undefined> {
-        // tslint:disable-next-line:no-console
-        console.log('Empeso');
-        const usuario = this._repositorioUsuario.findOne(id);
-        return usuario;
+        return this._repositorioUsuario
+            .findOne(id);
+    }
+
+    crearUno(usuario: UsuarioEntity) {
+        return this._repositorioUsuario
+            .save(usuario);
     }
 
     borrarUno(id: number): Promise<DeleteResult> {
-        // tslint:disable-next-line:no-unused-expression
-        return this._repositorioUsuario.delete(id);
+        return this._repositorioUsuario
+            .delete(id);
     }
 
-    actualizarUno(id: number,
-                  usuario: UsuarioEntity,
-    ): Promise<UsuarioEntity | undefined> {
-        // tslint:disable-next-line:no-unused-expression
+    actualizarUno(
+        id: number,
+        usuario: UsuarioEntity
+    ): Promise<UsuarioEntity> {
         usuario.id = id;
-        return this._repositorioUsuario.save(usuario);
+        return this._repositorioUsuario
+            .save(usuario); // UPSERT
     }
 
-    buscar(where: any = {}, skip: number = 0, take: number = 10, order: any = {
-        id: 'DESC',
-        nombre: 'ASC',
-    }): Promise<UsuarioEntity[]> {
+    buscar(
+        where: any = {},
+        skip: number = 0,
+        take: number = 10,
+        order: any = {
+            id: 'DESC',
+            nombre: 'ASC'
+        }
+    ): Promise<UsuarioEntity[]> {
 
         // Exactamente el nombre o Exactamente la cedula
         const consultaWhere = [
             {
-                nombre: '',
+                nombre: ''
             },
             {
-                cedula: '',
-            },
+                cedula: ''
+            }
         ];
-        // Exactamente el nombre o Exactamente la cedula
+
+        // Exactamente el nombre o LIKE la cedula
         const consultaWhereLike = [
             {
-                nombre: Like('%a%a'),
+                nombre: Like('a%')
             },
             {
-                cedula: Like('%a%a'),
-            },
+                cedula: Like('%a')
+            }
         ];
-        // Exactamente el nombre o Exactamente la cedula
-        const consultaWhereMoreThan = [
-            {
-                id: MoreThan(20),
-            }];
-        // Exactamente el nombre o Exactamente la cedula
-        const consultaWhereLessThan = [
-            {
-                id: LessThan(20),
-            },
-        ];
-        const consultaWhereEqual = [
-            {
-                id: Equal(20),
-            },
-        ];
-        return this._repositorioUsuario.find({
-            where: consultaWhere,
-            skip,
-            take,
-            order,
-        });
 
+        // id sea mayor a 20
+        const consultaWhereMoreThan = {
+            id: MoreThan(20)
+        };
+
+        // id sea igual a x
+        const consultaWhereIgual = {
+            id: 30
+        };
+
+        return this._repositorioUsuario
+            .find({
+                where: where,
+                skip: skip,
+                take: take,
+                order: order,
+            });
     }
+
 }

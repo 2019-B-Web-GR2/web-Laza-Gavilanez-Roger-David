@@ -2,21 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b034c5ed-d0fa-402c-b5fc-a56c235d99eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.create-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.update-dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/segundo-semestre" />
   </component>
   <component name="ProjectId" id="1VnwD1EL08AcAUBnWypWKY9uzxj" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -34,6 +47,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\a-pruebas2-http\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.tslint" />
     <property name="ts.external.directory.path" value="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\segundo-semestre\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -67,8 +81,20 @@
       <workItem from="1577902117956" duration="1182000" />
       <workItem from="1577905831857" duration="684000" />
       <workItem from="1577912670732" duration="269000" />
-      <workItem from="1578002736978" duration="4383000" />
+      <workItem from="1578002736978" duration="5663000" />
+      <workItem from="1578062608564" duration="170000" />
+      <workItem from="1578063072225" duration="3497000" />
+      <workItem from="1578067394430" duration="2411000" />
+      <workItem from="1578078701710" duration="5752000" />
     </task>
+    <task id="LOCAL-00001" summary="Final">
+      <created>1578007248532</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578007248532</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,15 +160,43 @@
       </list>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Final" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577902860433">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578083675036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577902860433" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578083675036" />
+    <state x="1027" y="117" key="CommitChangelistDialog2" timestamp="1578007247193">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1027" y="117" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1578007247193" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1577902113391">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1577902113390" />
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1578069809919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1578069809919" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1578069809919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1578069809919" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1578069809919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1578069809919" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1578069809919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1578069809919" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1578062778241">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1578062778241" />
     <state x="683" y="149" key="refactoring.ChangeSignatureDialog" timestamp="1578003192450">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

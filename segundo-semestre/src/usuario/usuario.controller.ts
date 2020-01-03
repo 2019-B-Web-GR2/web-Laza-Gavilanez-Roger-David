@@ -1,45 +1,156 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Session} from "@nestjs/common";
 import {UsuarioService} from "./usuario.service";
 import {UsuarioEntity} from "./usuario.entity";
 import {DeleteResult} from "typeorm";
+import * as Joi from '@hapi/joi';
+import {UsuarioCreateDto} from "./usuario.create-dto";
+import {validate} from "class-validator";
+import {UsuarioUpdateDto} from "./usuario.update-dto";
+
+// JS const Joi = require('@hapi/joi');
+
 
 @Controller('usuario')
 export class UsuarioController {
     constructor(
-        // tslint:disable-next-line:variable-name
         private readonly _usuarioService: UsuarioService,
     ) {
+
     }
+    @Post('login') login(
+        @Body('username') username: string,
+        @Body('password') password: string,
+        @Session() session
+    ){
+        console.log('Session', session);
+        if(username==='roger' && password==='1234'){
+            session.usuario={
+                nombre: 'roger',
+                userId: 1,
+                roles:['Administrador']
+            }
+            return 'ok';
+        }
+        if(username==='laza' && password==='1234'){
+            session.usuario={
+                nombre: 'laza',
+                userId: 2,
+                roles:['Supervisor']
+            }
+            return 'ok';
+        }
+        throw new BadRequestException('No envia credenciales');
+    }
+    @Get('hola')
+    hola(): string {
+        return `
+     <html>
+     <head><title>EPN</title></head>
+     <body>
+     <h1> Mi primera pagina web </h1>
+     </body>
+     </html>
+    `
+    }
+
+
+    // GET /modelo/:id
     @Get(':id')
-    hola(
+    obtenerUnUsuario(
         @Param('id') identificador: string,
     ): Promise<UsuarioEntity | undefined> {
-        return this._usuarioService.encontrarUno(Number(identificador));
-    }
-    @Put(':id')
-    actualizarUnUsuario(
-        @Body() usuario: UsuarioEntity,
-        @Param('id') id: string,
-    ): Promise<UsuarioEntity>  {
         return this._usuarioService
-            .actualizarUno(
-                +id,
-                usuario,
+            .encontrarUno(
+                Number(identificador)
             );
     }
+
     @Post()
-    crearUsuario(
+    async crearUnUsuario(
         @Body() usuario: UsuarioEntity,
-    ) {
-        // return this._usuarioService.encontrarUno(usuario);
+    ): Promise<UsuarioEntity> {
+        const usuarioCreateDTO = new UsuarioCreateDto();
+        usuarioCreateDTO.nombre = usuario.nombre;
+        usuarioCreateDTO.cedula = usuario.cedula;
+        const errores = await validate(usuarioCreateDTO);
+        if (errores.length > 0) {
+            throw new BadRequestException('Error validando');
+        } else {
+            return this._usuarioService
+                .crearUno(
+                    usuario
+                );
+        }
+
+
     }
+
+    @Put(':id')
+    async actualizarUnUsuario(
+        @Body() usuario: UsuarioEntity,
+        @Param('id') id: string,
+    ): Promise<UsuarioEntity> {
+        const usuarioUpdateDto = new UsuarioUpdateDto();
+        usuarioUpdateDto.nombre = usuario.nombre
+        usuarioUpdateDto.cedula = usuario.cedula
+        const errores = await validate(usuarioUpdateDto)
+        if(errores.length){
+            throw new BadRequestException('Error validando')
+        }
+        else{
+            return this._usuarioService
+                .actualizarUno(
+                    +id,
+                    usuario
+                );
+        }
+    }
+
     @Delete(':id')
     eliminarUno(
         @Param('id') id: string,
-    ): Promise<DeleteResult>{
+    ): Promise<DeleteResult> {
         return this._usuarioService
             .borrarUno(
-                +id,
+                +id
             );
     }
+
+    @Get()
+    async buscar(
+        @Query('skip') skip?: string | number,
+        @Query('take') take?: string | number,
+        @Query('where') where?: string,
+        @Query('order') order?: string,
+    ): Promise<UsuarioEntity[]> {
+        if (order) {
+            try {
+                order = JSON.parse(order);
+            } catch (e) {
+                order = undefined;
+            }
+        }
+        if (where) {
+            try {
+                where = JSON.parse(where);
+            } catch (e) {
+                where = undefined;
+            }
+        }
+        if (skip) {
+            skip = +skip;
+        }
+        if (take) {
+            take = +take;
+        }
+        return this._usuarioService
+            .buscar(
+                where,
+                skip as number,
+                take as number,
+                order
+            );
+    }
+
+
 }
