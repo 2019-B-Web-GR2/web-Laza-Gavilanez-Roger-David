@@ -7,7 +7,7 @@ import {
     Param,
     Post,
     Put,
-    Query,
+    Query, Req, Res,
     Session,
     UnauthorizedException
 } from "@nestjs/common";
@@ -24,10 +24,21 @@ import {UsuarioUpdateDto} from "./usuario.update-dto";
 
 @Controller('usuario')
 export class UsuarioController {
+    nombre="";
     constructor(
         private readonly _usuarioService: UsuarioService,
     ) {
 
+    }
+    @Get('ejemplo')
+    ejemplojs(
+        @Res() res,
+    ){
+        res.render('ejemplo', {
+            datos:{
+                nombre:'Roger',
+            },
+        });
     }
 
     @Post('login')
@@ -36,6 +47,7 @@ export class UsuarioController {
         @Body('password') password: string,
         @Session() session
     ) {
+
         console.log('Session', session);
         if (username === 'roger' && password === '1234') {
             session.usuario = {
@@ -62,14 +74,41 @@ export class UsuarioController {
     ) {
         return session;
     }
+    @Get('logout')
+    logout(
+        @Session() session,
+        @Req() req,
+
+    ) {
+        session.usuario=undefined;
+        req.session.destroy();
+        return 'Deslogueado';
+    }
 
     @Get('hola')
-    hola(): string {
+    hola(
+        @Session() session
+    ): string {
+        let contenidoHTML='';
+        if(session.usuario){
+            contenidoHTML = '<ul>';
+            session.usuario.roles.forEach((nombreRol)=> {
+                contenidoHTML = contenidoHTML + `<li>${nombreRol}</li>`
+            },
+            )
+        };
+
         return `
 <html>
         <head> <title>EPN</title> </head>
         <body>
-        <h1> Mi primera pagina web </h1>
+        <h1> Mi primera pagina web ${
+            session.usuario ? session.usuario.nombre : ''
+        }</h1>
+        <ul>
+            <li>Supervisor</li>
+            <li>Administrador</li>
+        </ul>
 </body>
 </html>`;
     }

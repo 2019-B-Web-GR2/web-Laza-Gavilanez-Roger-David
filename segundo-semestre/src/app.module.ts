@@ -15,7 +15,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
           name: 'default', // Nombre cadena de Conex.
           type: 'mysql',
           host: 'localhost',
-          port: 32769,
+          port: 32771,
           username: 'roger',
           password: '1234',
           database: 'prueba',

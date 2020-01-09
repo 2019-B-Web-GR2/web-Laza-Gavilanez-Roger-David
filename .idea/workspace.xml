@@ -4,12 +4,12 @@
     <list default="true" id="b034c5ed-d0fa-402c-b5fc-a56c235d99eb" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.create-dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.update-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/views/ejemplo.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.update-dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.update-dto.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,8 @@
       <workItem from="1578511217659" duration="1126000" />
       <workItem from="1578520014965" duration="583000" />
       <workItem from="1578527277563" duration="1134000" />
-      <workItem from="1578572345858" duration="5813000" />
+      <workItem from="1578572345858" duration="6453000" />
+      <workItem from="1578597238065" duration="4627000" />
     </task>
     <task id="LOCAL-00001" summary="Final">
       <created>1578007248532</created>
