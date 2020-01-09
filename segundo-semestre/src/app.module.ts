@@ -15,10 +15,10 @@ import {TypeOrmModule} from "@nestjs/typeorm";
           name: 'default', // Nombre cadena de Conex.
           type: 'mysql',
           host: 'localhost',
-          port: 32787,
-          username: 'root',
+          port: 32769,
+          username: 'roger',
           password: '1234',
-          database: 'web',
+          database: 'prueba',
           dropSchema: true,
           entities: [
             UsuarioEntity
