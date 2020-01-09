@@ -19,7 +19,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
           username: 'roger',
           password: '1234',
           database: 'prueba',
-          dropSchema: true,
+          dropSchema: true, // si ponemos falso no se borran los datos en la base 
           entities: [
             UsuarioEntity
           ],
