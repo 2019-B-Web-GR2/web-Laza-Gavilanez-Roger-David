@@ -30,6 +30,21 @@ export class UsuarioController {
     ) {
 
     }
+    @Get('rutas/buscar-mostrar-usuario')
+    async rutaMostrarUsuarios(
+        @Res() res,
+    ){
+        const  usuarios = await this._usuarioService.buscar();
+        res.render(
+            'usuario/rutas/buscar-mostrar-usuario',
+            {
+                datos: {
+                    //usuarios: usuarios,
+                    usuarios,
+                }
+            }
+        );
+    }
     @Get('ejemplo')
     ejemplojs(
         @Res() res,

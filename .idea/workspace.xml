@@ -4,7 +4,10 @@
     <list default="true" id="b034c5ed-d0fa-402c-b5fc-a56c235d99eb" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.create-dto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.update-dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/views/componentes/mostrar-numero.ejs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/segundo-semestre/views/ejemplo.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/views/usuario/componentes/mostrar-tabla.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/segundo-semestre/views/usuario/rutas/buscar-mostrar-usuario.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/segundo-semestre/src/usuario/usuario.entity.ts" afterDir="false" />
@@ -51,6 +54,9 @@
     <property name="ts.external.directory.path" value="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\segundo-semestre\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\segundo-semestre\views\componentes" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Roger Laza\Documents\GitHub\web-Laza-Gavilanez-Roger-David\segundo-semestre\src\usuario" />
     </key>
@@ -90,7 +96,9 @@
       <workItem from="1578520014965" duration="583000" />
       <workItem from="1578527277563" duration="1134000" />
       <workItem from="1578572345858" duration="6453000" />
-      <workItem from="1578597238065" duration="4627000" />
+      <workItem from="1578597238065" duration="4973000" />
+      <workItem from="1578668936129" duration="1026000" />
+      <workItem from="1578684108039" duration="5790000" />
     </task>
     <task id="LOCAL-00001" summary="Final">
       <created>1578007248532</created>
@@ -170,6 +178,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Final" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="72" y="181" key="#Inspections" timestamp="1578685645290">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="72" y="181" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1578685645290" />
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578083675036">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
