@@ -1,3 +1,43 @@
-<% usuarios.forEach((usuario)=>{%>
-    <p><%= usuario.nombre %></p>
-<%})%>
+<table class="table"> <!-- table -->
+    <thead> <!-- thead -->
+    <tr> <!-- table row -->
+        <th scope="col"> <!-- table header -->
+            ID
+        </th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cedula</th>
+        <th scope="col">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% usuarios.forEach( (usuario) => {%>
+        <tr> <!-- table row -->
+            <th scope="row">
+                <%= usuario.id%>
+            </th> <!-- table header -->
+            <td>
+                <%= usuario.nombre%>
+            </td> <!-- table detail -->
+            <td>
+                <%= usuario.cedula%>
+            </td> <!-- table detail -->
+            <td>
+                <a href="/usuario/ruta/editar-usuario/<%= usuario.id %>">
+                    <button type="button"
+                            class="btn btn-info">
+                        Editar
+                    </button>
+                </a>
+                <form action="/usuario/<%= usuario.id %>"
+                      method="POST"
+                >
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </form>
+            </td> <!-- table detail -->
+        </tr>
+    <%}); %>
+    </tbody> <!-- tbody -->
+</table>

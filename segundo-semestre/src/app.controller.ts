@@ -8,12 +8,12 @@ import {
   InternalServerErrorException,
   Post,
   Put,
-  Query,
+  Query, Res,
 } from '@nestjs/common';
 import {AppService} from './app.service';
 import {isEmpty} from 'rxjs/operators';
 
-@Controller()
+@Controller('pepito')
 export class AppController {
   constructor(private readonly appService: AppService) {}
   valor: number = 100;
@@ -21,6 +21,13 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @Get('login')
+  login(
+      @Res() res,
+  ) {
+    res.render('login/login');
+  }
+
   // DEBER CALCULADORA------------------------------------------------------------------------------------
   // SUMA CON METODO HEADERS
   @Get('suma')

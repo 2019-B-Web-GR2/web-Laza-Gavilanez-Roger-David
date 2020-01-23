@@ -7,77 +7,133 @@ import {
     Param,
     Post,
     Put,
-    Query, Req, Res,
+    Query,
+    Req, Res,
     Session,
-    UnauthorizedException
-} from "@nestjs/common";
-import {UsuarioService} from "./usuario.service";
-import {UsuarioEntity} from "./usuario.entity";
-import {DeleteResult} from "typeorm";
+} from '@nestjs/common';
+import {UsuarioService} from './usuario.service';
+import {UsuarioEntity} from './usuario.entity';
+import {DeleteResult} from 'typeorm';
 import * as Joi from '@hapi/joi';
-import {UsuarioCreateDto} from "./usuario.create-dto";
-import {validate} from "class-validator";
-import {UsuarioUpdateDto} from "./usuario.update-dto";
+import {UsuarioCreateDto} from './usuario.create-dto';
+import {validate} from 'class-validator';
+import {UsuarioUpdateDto} from './usuario.update-dto';
 
 // JS const Joi = require('@hapi/joi');
 
-
 @Controller('usuario')
 export class UsuarioController {
-    nombre="";
     constructor(
         private readonly _usuarioService: UsuarioService,
     ) {
 
     }
-    @Get('rutas/buscar-mostrar-usuario')
+
+    @Get('ruta/mostrar-usuarios')
     async rutaMostrarUsuarios(
+        @Query('mensaje') mensaje: string,
+        @Query('error') error: string,
         @Res() res,
-    ){
-        const  usuarios = await this._usuarioService.buscar();
+    ) {
+        const usuarios = await this._usuarioService.buscar();
         res.render(
             'usuario/rutas/buscar-mostrar-usuario',
             {
                 datos: {
-                    //usuarios: usuarios,
+                    // usuarios:usuarios -> nueva sintaxis,
+                    mensaje,
                     usuarios,
-                }
-            }
+                    error,
+                },
+            },
         );
     }
-    @Get('ejemplo')
-    ejemplojs(
+
+    @Get('ruta/crear-usuario')
+    rutaCrearUsuario(
+        @Query('error') error: string,
         @Res() res,
-    ){
+    ) {
+        res.render(
+            'usuario/rutas/crear-usuario',
+            {
+                datos: {
+                    error,
+                },
+            },
+        );
+    }
+
+    @Get('ruta/editar-usuario/:idUsuario')
+    async rutaEditarUsuario(
+        @Query('error') error: string,
+        @Param('idUsuario') idUsuario: string,
+        @Res() res,
+    ) {
+        const consulta = {
+            id: idUsuario,
+        };
+        try {
+            const arregloUsuarios = await this._usuarioService.buscar(consulta);
+            if (arregloUsuarios.length > 0) {
+                res.render(
+                    'usuario/rutas/crear-usuario',
+                    {
+                        datos: {error, usuario: arregloUsuarios[0]},
+                    },
+                );
+            } else {
+                res.redirect(
+                    '/usuario/ruta/mostrar-usuarios?error=No existe ese usuario',
+                );
+            }
+        } catch (error) {
+            console.log(error);
+            res.redirect(
+                '/usuario/ruta/buscar-mostrar-usuarios?error=Error editando usuario',
+            );
+        }
+
+    }
+
+    @Get('ejemploejs')
+    ejemploejs(
+        @Res() res,
+    ) {
         res.render('ejemplo', {
-            datos:{
-                nombre:'Roger',
+            datos: {
+                nombre: 'Adrian',
+                suma: this.suma, // Definicion de la funcion
+                joi: Joi,
             },
         });
+    }
+
+    suma(numUno, numDos) {
+        return numUno + numDos;
     }
 
     @Post('login')
     login(
         @Body('username') username: string,
         @Body('password') password: string,
-        @Session() session
+        @Session() session,
     ) {
-
         console.log('Session', session);
-        if (username === 'roger' && password === '1234') {
+        if (username === 'adrian' && password === '1234') {
             session.usuario = {
-                nombre: 'Roger',
+                nombre: 'Adrian',
                 userId: 1,
-                roles: ['Administrador']
-            }
+                roles: ['Administrador'],
+            };
             return 'ok';
         }
-        if (username === 'laza' && password === '1234') {
+        if (username === 'vicente' && password === '1234') {
             session.usuario = {
-                nombre: 'Laza',
+                nombre: 'Vicente',
                 userId: 2,
-                roles: ['Supervisor']
-            }
+                roles: ['Supervisor'],
+            };
             return 'ok';
         }
         throw new BadRequestException('No envia credenciales');
@@ -85,49 +141,50 @@ export class UsuarioController {
 
     @Get('sesion')
     sesion(
-        @Session() session
+        @Session() session,
     ) {
         return session;
     }
+
     @Get('logout')
     logout(
         @Session() session,
         @Req() req,
-
     ) {
-        session.usuario=undefined;
+        session.usuario = undefined;
         req.session.destroy();
         return 'Deslogueado';
     }
 
     @Get('hola')
     hola(
-        @Session() session
+        @Session() session,
     ): string {
-        let contenidoHTML='';
-        if(session.usuario){
+        let contenidoHTML = '';
+        if (session.usuario) {
             contenidoHTML = '<ul>';
-            session.usuario.roles.forEach((nombreRol)=> {
-                contenidoHTML = contenidoHTML + `<li>${nombreRol}</li>`
-            },
-            )
-        };
+            session.usuario
+                .roles
+                .forEach(
+                    (nombreRol) => {
+                        contenidoHTML = contenidoHTML + `<li>${nombreRol}</li>`;
+                    },
+                );
+            contenidoHTML += '</ul>';
+        }
 
         return `
 <html>
         <head> <title>EPN</title> </head>
         <body>
+        <--! CONDICION ? SI : NO -->
         <h1> Mi primera pagina web ${
             session.usuario ? session.usuario.nombre : ''
         }</h1>
-        <ul>
-            <li>Supervisor</li>
-            <li>Administrador</li>
-        </ul>
+        ${contenidoHTML}
 </body>
 </html>`;
     }
-
 
     // GET /modelo/:id
     @Get(':id')
@@ -136,67 +193,68 @@ export class UsuarioController {
     ): Promise<UsuarioEntity | undefined> {
         return this._usuarioService
             .encontrarUno(
-                Number(identificador)
+                Number(identificador),
             );
     }
 
     @Post()
     async crearUnUsuario(
         @Body() usuario: UsuarioEntity,
-        @Session() session,
-    ): Promise<UsuarioEntity> {
-        const administrador=session.usuario.roles.find(
-            rol => {
-                return rol ==='Administrador'
-            }
-        )
-        if(!administrador){
-            throw new BadRequestException('Error usted no cuenta con los suficientes permisos');
-        }
+        @Res() res,
+    ): Promise<void> {
         const usuarioCreateDTO = new UsuarioCreateDto();
         usuarioCreateDTO.nombre = usuario.nombre;
         usuarioCreateDTO.cedula = usuario.cedula;
         const errores = await validate(usuarioCreateDTO);
         if (errores.length > 0) {
-            throw new BadRequestException('Error validando');
+            res.redirect(
+                '/usuario/ruta/crear-usuario?error=Error validando',
+            );
+            // throw new BadRequestException('Error validando');
         } else {
-            return this._usuarioService
-                .crearUno(
-                    usuario
+            try {
+                await this._usuarioService
+                    .crearUno(
+                        usuario,
+                    );
+                res.redirect(
+                    '/usuario/ruta/mostrar-usuarios?mensaje=El usuario se creo correctamente',
                 );
-        }
+            } catch (error) {
+                console.error(error);
+                res.redirect(
+                    '/usuario/ruta/crear-usuario?error=Error del servidor',
+                );
+            }
 
+        }
 
     }
 
-    @Put(':id')
+    @Post(':id')
     async actualizarUnUsuario(
         @Body() usuario: UsuarioEntity,
         @Param('id') id: string,
-        @Session() session,
-    ): Promise<UsuarioEntity> {
-        const rol=session.usuario.roles.find(
-            rol => {
-                return (rol === 'Administrador' || rol === 'Supervisor');
-            }
-        )
-
-        if(!rol){
-            throw new BadRequestException('Error usted no cuenta con los suficientes permisos');
-        }
+        @Res() res,
+    ): Promise<void> {
         const usuarioUpdateDTO = new UsuarioUpdateDto();
         usuarioUpdateDTO.nombre = usuario.nombre;
         usuarioUpdateDTO.cedula = usuario.cedula;
         usuarioUpdateDTO.id = +id;
         const errores = await validate(usuarioUpdateDTO);
         if (errores.length > 0) {
-            throw new BadRequestException('Error validando');
+            res.redirect(
+                '/usuario/ruta/editar-usuario/' + id + '?error=Usuario no validado',
+            );
         } else {
-            return this._usuarioService
+            await this._usuarioService
                 .actualizarUno(
                     +id,
-                    usuario
+                    usuario,
                 );
+            res.redirect(
+                '/usuario/ruta/mostrar-usuarios?mensaje=El usuario ' + usuario.nombre + ' actualizado',
+            );
         }
 
     }
@@ -204,20 +262,28 @@ export class UsuarioController {
     @Delete(':id')
     eliminarUno(
         @Param('id') id: string,
-        @Session() session,
     ): Promise<DeleteResult> {
-        const rol=session.usuario.roles.find(
-            rol => {
-                return rol ==='Administrador'
-            }
-        )
-        if(!rol){
-            throw new BadRequestException('Error usted no cuenta con los suficientes permisos');
-        }
         return this._usuarioService
             .borrarUno(
-                +id
+                +id,
             );
+    }
+
+    @Post(':id')
+    async eliminarUnoPost(
+        @Param('id') id: string,
+        @Res() res,
+    ): Promise<void> {
+        try {
+            await this._usuarioService
+                .borrarUno(
+                    +id,
+                );
+            res.redirect(`/usuario/ruta/mostrar-usuarios?mensaje=Usuario ID: ${id} eliminado`);
+        } catch (error) {
+            console.error(error);
+            res.redirect('/usuario/ruta/mostrar-usuarios?error=Error del servidor');
+        }
     }
 
     @Get()
@@ -264,9 +330,8 @@ export class UsuarioController {
                 where,
                 skip as number,
                 take as number,
-                order
+                order,
             );
     }
-
 
 }
